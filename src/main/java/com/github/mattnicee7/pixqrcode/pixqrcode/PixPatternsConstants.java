@@ -8,6 +8,6 @@ public class PixPatternsConstants {
 
     public static final Pattern RECEIVER_CITY_PATTERN = Pattern.compile("[A-z ]{1,15}");
 
-    public static final Pattern TRANSACTION_IDENTIFIER_PATTERN = Pattern.compile("[A-z0-9]{1,20}");
+    public static final Pattern TRANSACTION_IDENTIFIER_PATTERN = Pattern.compile("[A-z0-9]{1,35}");
 
 }

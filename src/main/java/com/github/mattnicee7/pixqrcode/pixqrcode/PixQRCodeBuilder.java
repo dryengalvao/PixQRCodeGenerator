@@ -133,11 +133,11 @@ public class PixQRCodeBuilder {
         if (transactionIdentifier.chars()
                 .mapToObj(c -> (char) c)
                 .filter(it -> it == ' ')
-                .count() > 1)
+                .count() > 0)
             throw new InvalidValueFormatException("O identificador não pode ter espaços em branco.");
 
         if (!(PixPatternsConstants.TRANSACTION_IDENTIFIER_PATTERN.matcher(transactionIdentifier).matches()))
-            throw new InvalidValueFormatException("Há algo de errado com o identificador de transação. Regex: [a-Z0-9]{1,20}");
+            throw new InvalidValueFormatException("Há algo de errado com o identificador de transação. Regex: [a-Z0-9]{1,35}");
 
         this.pixQRCode.setTransactionIdentifier(transactionIdentifier);
 

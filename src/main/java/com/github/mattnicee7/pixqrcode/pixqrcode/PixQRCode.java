@@ -40,7 +40,7 @@ public class PixQRCode {
                 this.pixKey;
 
         stringBuilder.append("26")
-                .append(merchantAccountInformation.length())
+                .append(merchantAccountInformation.length() < 10 ? "0" + merchantAccountInformation.length() : merchantAccountInformation.length())
                 .append(merchantAccountInformation);
 
         // Merchant Category Code:
@@ -76,12 +76,14 @@ public class PixQRCode {
 
         // Additional Data Field:
         final String transactionIdentifierFinalString =
-                "05" + (transactionIdentifier.length() < 10 ? "0" + transactionIdentifier.length() : transactionIdentifier.length()) + transactionIdentifier;
+                "05" + (transactionIdentifier.length() < 10 ? "0" + transactionIdentifier.length() : 
+                        transactionIdentifier.length() < 100 ? String.format("%02d", transactionIdentifier.length()) : 
+                        transactionIdentifier.length()) + transactionIdentifier;
 
         stringBuilder.append("62")
-                .append(
-                        transactionIdentifierFinalString.length() < 10 ? "0" + transactionIdentifierFinalString.length()
-                                : transactionIdentifierFinalString.length())
+                .append(transactionIdentifierFinalString.length() < 10 ? "0" + transactionIdentifierFinalString.length() : 
+                        transactionIdentifierFinalString.length() < 100 ? String.format("%02d", transactionIdentifierFinalString.length()) : 
+                        transactionIdentifierFinalString.length())
                 .append(transactionIdentifierFinalString);
 
         // Unreserved Templates:
@@ -93,5 +95,4 @@ public class PixQRCode {
 
         return stringBuilder.toString();
     }
-
 }
